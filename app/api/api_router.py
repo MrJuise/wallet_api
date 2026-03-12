@@ -7,7 +7,3 @@ api_router = APIRouter(prefix="/api/v1")
 api_router.include_router(health_router)
 api_router.include_router(wallets_router)
 api_router.include_router(operation_router)
-
-from app.api.v1.add_wallet import router as add_wallet_router
-
-api_router.include_router(add_wallet_router)
