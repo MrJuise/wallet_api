@@ -43,29 +43,23 @@ def create_wallet(balance=1000):
 
 def test_get_balance(client):
     wallet_uuid = create_wallet(1000)
-
     r = client.get(f"/api/v1/wallets/{wallet_uuid}")
-
     assert r.status_code == 200
     assert r.json()["balance"] == 1000
 
 
 def test_deposit_withdraw(client):
     wallet_uuid = create_wallet(1000)
-
     r1 = client.post(
         f"/api/v1/wallets/{wallet_uuid}/operation",
         json={"operation_type": "DEPOSIT", "amount": 500},
     )
-
     assert r1.status_code == 200
     assert r1.json()["balance"] == 1500
-
     r2 = client.post(
         f"/api/v1/wallets/{wallet_uuid}/operation",
         json={"operation_type": "WITHDRAW", "amount": 300},
     )
-
     assert r2.status_code == 200
     assert r2.json()["balance"] == 1200
 
